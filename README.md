@@ -60,3 +60,15 @@ $ curl localhost:3000 \
 ```bash
 $ [{"from":"0x0a69babef1ca67a37ffaf7a485dfff3382056e78c","to":"0x011b815efb8f581194ae79006d24e0d814b7697f6","value":2147483647,"blockHash":"0x04ae1ee0792be04f491127d53d76bc77f37a709c08491f4fa9535ec07ec776b7","blockNumber":"0x1300c01","transactionHash":"0x27404e648ed94dfe8d8e0be8918ca594e133ca73ee98996aae7aa5cf30a40b52"},{"from":"0x0a69babef1ca67a37ffaf7a485dfff3382056e78c","to":"0x011b815efb8f581194ae79006d24e0d814b7697f6","value":2147483647,"blockHash":"0x3df3f5d03dcfb3c34046c99ebf62e07207c63cb115686c69e92c2896fdab5616","blockNumber":"0x1300c02","transactionHash":"0xd76dc4c6ca603bd997fdfba4578977c82078fe169b197a66f455103864abdce0"},{"from":"0x0a69babef1ca67a37ffaf7a485dfff3382056e78c","to":"0x0c7bbec68d12a0d1830360f8ec58fa599ba1b0e9b","value":2147483647,"blockHash":"0x3df3f5d03dcfb3c34046c99ebf62e07207c63cb115686c69e92c2896fdab5616","blockNumber":"0x1300c02","transactionHash":"0xc3bc7bfe3464b30201ecb68dec3757139bcb41c9b9814d50162fc4a6221e5693"},{"from":"0x0a69babef1ca67a37ffaf7a485dfff3382056e78c","to":"0x011b815efb8f581194ae79006d24e0d814b7697f6","value":2147483647,"blockHash":"0xe407e9b2cfb9bb0fdfa3c912312197cc817e4d8d708040ec0bddb7e896e8f256","blockNumber":"0x1300c03","transactionHash":"0xe736b7193b97d0f3073b2a2b2f12ba84772a4ff59b2d0eadc63a6d630437fb1d"},{"from":"0x0a69babef1ca67a37ffaf7a485dfff3382056e78c","to":"0x0bcc66fc7402daa98f5764057f95ac66b9391cd6b","value":2147483647,"blockHash":"0xe407e9b2cfb9bb0fdfa3c912312197cc817e4d8d708040ec0bddb7e896e8f256","blockNumber":"0x1300c03","transactionHash":"0x35a4868ea2d6d10a4f1ad0099095edf33db27f26c60180b892a55195e586e499"},{"from":"0x011b815efb8f581194ae79006d24e0d814b7697f6","to":"0x0a69babef1ca67a37ffaf7a485dfff3382056e78c","value":2147483647,"blockHash":"0xfd804897efd0f3109e8323f60881a27e515e48991e81b14f3dd068f531f8d17f","blockNumber":"0x1300c0d","transactionHash":"0xd6bdfacc505db39bf18bdce15b3904868c1579e10fde60d568ff9b665de4af53"}]
 ```
+
+## Limitions
+
+When getting transactions with a large blocks range, some errors may occured. Because most of rpc providers do not allow more than 1000 rows of results. 
+For block older than 128, a archive node must be used to get transactions.
+
+### Optimize performances 
+
+This app can be optimized by using:
+
+* Redis: cache each response from rpc provider
+* Indexing blockchain data by using Blockscout 
