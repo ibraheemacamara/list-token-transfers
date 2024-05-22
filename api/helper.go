@@ -5,13 +5,11 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/ibraheemacamara/list-token-transfers/config"
 	"github.com/ibraheemacamara/list-token-transfers/types"
 	"github.com/ibraheemacamara/list-token-transfers/utils"
 )
 
 func getLogs(ctx context.Context, client RpcProviderClientInterface, lastestBlock int64, reqParam types.TransfersListParams) types.JSONRPCResponse {
-	cfg := config.GetConfig()
 	topic_0 := cfg.Erc20TransferTopic()
 
 	fromBlock := fmt.Sprintf("0x%x", lastestBlock-reqParam.LastBlocks)

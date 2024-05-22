@@ -14,6 +14,8 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
+var cfg config.Config
+
 type RpcProviderClientInterface interface {
 	SendRequest(ctx context.Context, body types.JSONRPCRequest) types.JSONRPCResponse
 }
@@ -22,14 +24,16 @@ type Controller struct {
 	rpcProviderClient RpcProviderClientInterface
 }
 
+func (c *Controller) SetConfig(config config.Config) {
+	cfg = config
+}
+
 func NewController(rpcProviderClient RpcProviderClientInterface) *Controller {
 	return &Controller{
 		rpcProviderClient: rpcProviderClient,
 	}
 }
 
-// Request
-// curl -X POST --data '{"jsonrpc":"2.0","method":"chiliz_transfersList","params":[{"addresses":["0x407d73d8a49eeb85d32cf465507dd71d507100c1"], "fromBlock":"latest"}],"id":1}
 func (c *Controller) MainHandler() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		log.Debugf("Received request %v", ctx.Request)
@@ -49,8 +53,7 @@ func (c *Controller) MainHandler() gin.HandlerFunc {
 			return
 		}
 
-		cfg := config.GetConfig()
-		allowedMathod := cfg.AllowedMethods()
+		allowedMathod := cfg.AllowedMethods
 		if !utils.Contains(allowedMathod, req.Method) {
 			ctx.JSON(http.StatusNotFound, gin.H{"error": "method not found"})
 			return

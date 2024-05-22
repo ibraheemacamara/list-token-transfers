@@ -14,7 +14,7 @@ type Config struct {
 	env                string
 	erc20TransferTopic string
 	rpcProvider        string
-	allowedMethods     []string
+	AllowedMethods     []string
 }
 
 var cfg Config
@@ -56,7 +56,7 @@ func LoadConfig() error {
 		port:               port,
 		logLevel:           logLevel,
 		env:                env,
-		allowedMethods:     allowedMethod,
+		AllowedMethods:     allowedMethod,
 	}
 
 	return nil
@@ -95,9 +95,4 @@ func (c Config) Erc20TransferTopic() string {
 // rpcProvider returns the rpcProvider for the configuration.
 func (c Config) RpcProvider() string {
 	return c.rpcProvider
-}
-
-// AllowedMethods returns the AllowedMethod for the configuration.
-func (c Config) AllowedMethods() []string {
-	return c.allowedMethods
 }

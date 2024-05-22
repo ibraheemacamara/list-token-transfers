@@ -23,6 +23,7 @@ func main() {
 	// Init rpc provider client
 	rppcProviderClient := utils.Init(cfg.RpcProvider(), time.Second*20)
 	controller := api.NewController(rppcProviderClient)
+	controller.SetConfig(cfg)
 
 	router := gin.Default()
 
